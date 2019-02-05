@@ -10,7 +10,7 @@ public class App
         System.out.println( "Hello World!" );
     }
     
-    public void vendingMachineInit() {
+    public void vendingMachineInIt() {
     	
     }
 }
