@@ -1,12 +1,17 @@
 package codecool.danielszakacs.iremshomework.iremshomework.vendingMachine;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import codecool.danielszakacs.iremshomework.iremshomework.products.Product;
+
 public class VendingMachine {
 	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
+	private Map<Product, Integer> listOfProduct = new HashMap();
 	
 	
 	public void listOfCoinHandler(String userInput){
@@ -26,6 +31,12 @@ public class VendingMachine {
         });
         return result.get();
     }
+	
+	
+	public int countRemainingChange(String productName, int coin) {
+		int result = coin - this.listOfProduct.get(productName);
+		return result;
+	}
 	
 	
 
