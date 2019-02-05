@@ -16,6 +16,7 @@ public class VendingMachine {
 			put("Soda", 20);
 		}
 	};
+	
 	//TODO only for test methods
 	private Map<String, Integer> listOfProductPrice = new HashMap<String, Integer>() {
 		{
