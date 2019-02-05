@@ -10,9 +10,31 @@ import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinMan
 
 public class VendingMachine {
 //	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
-	private Map<String, Integer> listOfProduct = new HashMap();
-	private Map<String, Integer> listOfProductPrice = new HashMap();
+	private Map<String, Integer> listOfProduct = new HashMap<String, Integer>(){
+		{
+			put("Coke", 20);
+			put("Pepsi", 20);
+			put("Soda", 20);
+		}
+	};
+	//TODO only for test methods
+	private Map<String, Integer> listOfProductPrice = new HashMap<String, Integer>() {
+		{
+			put("Coke", 25);
+			put("Pepsi", 35);
+			put("Soda", 45);
+		}
+	};
+			
 	private CoinManager coinManager = new CoinManager();
+	
+	public Map<String, Integer> getListOfProduct(){
+		return this.listOfProduct;
+	}
+	
+	public Map<String, Integer> getListOfProductPrice(){
+		return this.listOfProductPrice;
+	}
 	
 	
 	public void runVendingMachine() {
@@ -67,9 +89,6 @@ public class VendingMachine {
 		this.giveProductToUser(userDecision);
 	}
 	
-	public void finishOpperation() {
-		System.out.println("See you soon!");
-	}
 	
 	public void giveProductToUser(String productName) {
 		try {
@@ -80,7 +99,10 @@ public class VendingMachine {
 		}finally {
 			this.finishOpperation();
 		}
-		
+	}
+	
+	public void finishOpperation() {
+		System.out.println("See you soon!");
 	}
 
 }

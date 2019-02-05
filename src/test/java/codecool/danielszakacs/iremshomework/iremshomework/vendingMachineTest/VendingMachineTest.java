@@ -8,7 +8,7 @@ import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinMan
 import junit.framework.TestCase;
 
 public class VendingMachineTest extends TestCase{
-	
+	private VendingMachine vm = new VendingMachine();
 	private CoinManager cm = new CoinManager();
 	
 	
@@ -20,14 +20,14 @@ public class VendingMachineTest extends TestCase{
 	
 	
 	public void VendingMachine_countRemainingChange_willbe5() {
-		Product product = new Product("Cola", 20) ;
-		assertEquals(5, this.cm.countRemainingChange(product, 15));
+		int cokePrice = vm.getListOfProductPrice().get("Coke");
+		assertEquals(5, this.cm.countRemainingChange(cokePrice, 30));
 	}
 	
 	
 	public void VendingMachine_checkIfCoinEnough_returnTrue() {
-		Product product = new Product("Cola", 25) ;
-		assertFalse(this.cm.checkIfCoinEnough(product, 10));
+		int cokePrice = vm.getListOfProductPrice().get("Coke");
+		assertFalse(this.cm.checkIfCoinEnough(cokePrice, 10));
 	}
 	
 
