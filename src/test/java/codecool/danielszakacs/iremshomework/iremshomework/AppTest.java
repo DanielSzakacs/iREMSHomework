@@ -1,6 +1,7 @@
 package codecool.danielszakacs.iremshomework.iremshomework;
 
 import junit.framework.Test;
+
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
@@ -31,6 +32,7 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
+    
     public void testApp()
     {
         assertTrue( true );
