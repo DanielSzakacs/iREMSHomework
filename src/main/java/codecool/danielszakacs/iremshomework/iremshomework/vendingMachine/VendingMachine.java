@@ -20,8 +20,9 @@ public class VendingMachine {
 		List<Integer> usrCoin = this.coinManager.createListOfInt(userinput);
 		if(this.coinManager.checkCoinValid(usrCoin)) {
 			int userSumCoinAmount = usrCoin.stream().mapToInt(t -> t.intValue()).sum();
-			String productName = "Coka";
-			this.coinManager.checkIfCoinEnough(productName, userSumCoinAmount); //TODO this is a boolean
+			
+			this.offerProducts();
+			//this.coinManager.checkIfCoinEnough(productName, userSumCoinAmount); //TODO this is a boolean
 		}	
 	}
 	
@@ -50,10 +51,11 @@ public class VendingMachine {
 	}
 	
 	public void manageUserOrder(){
-		String userDecision; 
-		String userInput = this.getUserInput("Please select a product. Or cancel with 'c' ");
-		if(userInput.equalsIgnoreCase("c")){
-			this.cancelOperation(); // TODO returnning a boolean 
+		String userDecision = null; 
+		String userInput = this.getUserInput("Please select a product.");
+		
+		if(!this.cancelOperation()) {
+			this.finishOpperation();
 		}
 		else if(userInput.equalsIgnoreCase("0")) {
 			userDecision = "Coka";
@@ -62,9 +64,7 @@ public class VendingMachine {
 		}else if(userInput.equalsIgnoreCase("2")) {
 			userDecision = "Soda";
 		}
-		if(this.cancelOperation()){
-			
-		}
+		this.giveProductToUser(userDecision);
 	}
 	
 	public void finishOpperation() {
@@ -72,8 +72,15 @@ public class VendingMachine {
 	}
 	
 	public void giveProductToUser(String productName) {
-		this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1);
-		System.out.println("Here is your " + productName);
+		try {
+			this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1);
+			System.out.println("Here is your " + productName);
+		}catch(NullPointerException e) {
+			System.out.println("Sorry but your input is wrong, try it again ");
+		}finally {
+			this.finishOpperation();
+		}
+		
 	}
 
 }
