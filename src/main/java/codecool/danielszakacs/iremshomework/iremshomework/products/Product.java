@@ -22,4 +22,8 @@ public class Product {
 		this.quantity = quantity;
 	}
 	
+	public void getOneProduct() {
+		this.quantity --;
+	}
+	
 }
