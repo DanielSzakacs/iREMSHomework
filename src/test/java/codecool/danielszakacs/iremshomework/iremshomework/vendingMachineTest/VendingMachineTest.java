@@ -15,6 +15,9 @@ public class VendingMachineTest extends TestCase{
 		assertFalse(result);
 	}
 	
+	public void VendingMachine_countRemainingChange_willbe10() {
+		assertEquals(10, this.vm.countRemainingChange("Coka", 15));
+	}
 	
 
 }
