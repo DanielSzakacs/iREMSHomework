@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -13,8 +14,25 @@ public class VendingMachine {
 	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
 	private Map<String, Product> listOfProduct = new HashMap();
 	
+	public void runVendingMachine() {
+		String userinput = this.getUserInput("Please add your coin (For instance 10,25,1,5)");
+		List<Integer> usrCoin = this.createListOfInt(userinput);
+		if(this.checkCoinValid(usrCoin)) {
+			int userSumCoinAmount = usrCoin.stream().mapToInt(t -> t.intValue()).sum();
+			String productName = "Coka";
+			this.checkIfCoinEnough(productName, userSumCoinAmount); //TODO this is a boolean
+		}
+		
+	}
 	
-	public List<Integer> listOfIntCreater(String userInput){
+	public String getUserInput(String output) {
+		Scanner userInput = new Scanner(System.in);
+		System.out.println(output);
+		return userInput.next();
+	}
+	
+	
+	public List<Integer> createListOfInt(String userInput){
 		List<String> userInputInList = Arrays.asList(userInput.split(","));
         List<Integer> listOfCoins = userInputInList.stream()
                 .map(Integer::valueOf)
@@ -41,12 +59,14 @@ public class VendingMachine {
 	
 
 	
-	public void checkIfCoinEnough(String productName, int coin) {
+	public boolean checkIfCoinEnough(String productName, int coin) {
 		if(coin >= this.listOfProduct.get(productName).getPrice()) {
 			int result = this.countRemainingChange(productName, coin);
 			System.out.println("Your Remaining change is " + result);
+			return true;
 		}else {
 			System.out.println("Please try again, not enought coin.");
+			return false;
 		}
 	}
 	
