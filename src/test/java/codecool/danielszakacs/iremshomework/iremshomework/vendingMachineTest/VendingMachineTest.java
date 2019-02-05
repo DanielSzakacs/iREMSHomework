@@ -19,5 +19,9 @@ public class VendingMachineTest extends TestCase{
 		assertEquals(10, this.vm.countRemainingChange("Coka", 15));
 	}
 	
+	public void VendingMachine_checkIfCoinEnough_returnTrue() {
+		assertFalse(this.vm.checkIfCoinEnough("Coka", 10));
+	}
+	
 
 }
