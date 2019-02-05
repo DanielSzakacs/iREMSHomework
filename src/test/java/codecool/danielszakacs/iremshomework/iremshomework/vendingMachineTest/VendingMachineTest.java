@@ -3,7 +3,6 @@ package codecool.danielszakacs.iremshomework.iremshomework.vendingMachineTest;
 import java.util.List;
 import java.util.Arrays;
 
-import codecool.danielszakacs.iremshomework.iremshomework.products.Product;
 import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.VendingMachine;
 import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinManager.CoinManager;
 import junit.framework.TestCase;
