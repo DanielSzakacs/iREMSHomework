@@ -14,5 +14,7 @@ public class VendingMachineTest extends TestCase{
 		boolean result = this.vm.checkCoinValid(listOfCoin);
 		assertFalse(result);
 	}
+	
+	
 
 }
