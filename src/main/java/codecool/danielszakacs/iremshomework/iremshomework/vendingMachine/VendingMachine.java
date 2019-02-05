@@ -9,7 +9,6 @@ import java.util.Scanner;
 import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinManager.CoinManager;
 
 public class VendingMachine {
-//	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
 	private Map<String, Integer> listOfProduct = new HashMap<String, Integer>(){
 		{
 			put("Coke", 20);
@@ -28,9 +27,11 @@ public class VendingMachine {
 			
 	private CoinManager coinManager = new CoinManager();
 	
+	
 	public Map<String, Integer> getListOfProduct(){
 		return this.listOfProduct;
 	}
+	
 	
 	public Map<String, Integer> getListOfProductPrice(){
 		return this.listOfProductPrice;
@@ -38,21 +39,24 @@ public class VendingMachine {
 	
 	
 	public void runVendingMachine() {
-		String userinput = this.getUserInput("Please add your coin (For instance 10,25,1,5)");
+		String userinput = this.getUserInput("Please add your coin (For instance 1,5,10,25)");
 		List<Integer> usrCoin = this.coinManager.createListOfInt(userinput);
 		if(this.coinManager.checkCoinValid(usrCoin)) {
 			int userSumCoinAmount = usrCoin.stream().mapToInt(t -> t.intValue()).sum();
-			
-			this.offerProducts();
-			//this.coinManager.checkIfCoinEnough(productName, userSumCoinAmount); //TODO this is a boolean
-		}	
+			this.offerProducts(userSumCoinAmount);
+		}else {
+			System.out.println("Sorry but you don't have enough coin");
+			this.finishOpperation();
+		}
 	}
+	
 	
 	public String getUserInput(String output) {
 		Scanner userInput = new Scanner(System.in);
 		System.out.println(output);
 		return userInput.next();
 	}
+	
 	
 	public boolean cancelOperation() {
 		String text = "Are you sure you want to continue the operation? Press y ";
@@ -62,17 +66,19 @@ public class VendingMachine {
 		return false;
 	}
 	
-	public void offerProducts() {
+	
+	public void offerProducts(int usercoin) {
 		System.out.println("Please select a product");
 		int counter = 0;
 		for(String productName: this.listOfProduct.keySet()) {
 			System.out.println(productName + "  press: (" + counter + ")");
 			counter++;
 		}
-		this.manageUserOrder();
+		this.manageUserOrder(usercoin);
 	}
 	
-	public void manageUserOrder(){
+	
+	public void manageUserOrder(int usercoin){
 		String userDecision = null; 
 		String userInput = this.getUserInput("Please select a product.");
 		
@@ -80,26 +86,28 @@ public class VendingMachine {
 			this.finishOpperation();
 		}
 		else if(userInput.equalsIgnoreCase("0")) {
-			userDecision = "Coka";
+			userDecision = "Coke";
 		}else if(userInput.equalsIgnoreCase("1")) {
 			userDecision = "Pepsi";
 		}else if(userInput.equalsIgnoreCase("2")) {
 			userDecision = "Soda";
 		}
-		this.giveProductToUser(userDecision);
+		try {
+			if(this.coinManager.checkIfCoinEnough(this.listOfProductPrice.get(userDecision), usercoin)) {
+				this.giveProductToUser(userDecision);
+			}
+		}catch(NullPointerException e) {
+			System.out.println("Sorry but your input is wrong, try it again ");
+			this.finishOpperation();
+		}
 	}
 	
 	
 	public void giveProductToUser(String productName) {
-		try {
-			this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1);
-			System.out.println("Here is your " + productName);
-		}catch(NullPointerException e) {
-			System.out.println("Sorry but your input is wrong, try it again ");
-		}finally {
-			this.finishOpperation();
-		}
+		this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1);
+		System.out.println("Here is your " + productName);	
 	}
+	
 	
 	public void finishOpperation() {
 		System.out.println("See you soon!");
