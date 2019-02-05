@@ -3,6 +3,7 @@ package codecool.danielszakacs.iremshomework.iremshomework.vendingMachineTest;
 import java.util.List;
 import java.util.Arrays;
 
+import codecool.danielszakacs.iremshomework.iremshomework.products.Product;
 import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.VendingMachine;
 import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinManager.CoinManager;
 import junit.framework.TestCase;
@@ -19,13 +20,15 @@ public class VendingMachineTest extends TestCase{
 	}
 	
 	
-	public void VendingMachine_countRemainingChange_willbe10() {
-		assertEquals(10, this.cm.countRemainingChange("Coka", 15));
+	public void VendingMachine_countRemainingChange_willbe5() {
+		Product product = new Product("Cola", 20) ;
+		assertEquals(5, this.cm.countRemainingChange(product, 15));
 	}
 	
 	
 	public void VendingMachine_checkIfCoinEnough_returnTrue() {
-		assertFalse(this.cm.checkIfCoinEnough("Coka", 10));
+		Product product = new Product("Cola", 25) ;
+		assertFalse(this.cm.checkIfCoinEnough(product, 10));
 	}
 	
 
