@@ -7,7 +7,9 @@ import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.Vending
 import junit.framework.TestCase;
 
 public class VendingMachineTest extends TestCase{
+	
 	private VendingMachine vm = new VendingMachine();
+	
 	
 	public void VendingMachine_checkCoinValid_returnFalse() {
 		List listOfCoin = (List) Arrays.asList(10, 20, 50, 3);
@@ -15,9 +17,11 @@ public class VendingMachineTest extends TestCase{
 		assertFalse(result);
 	}
 	
+	
 	public void VendingMachine_countRemainingChange_willbe10() {
 		assertEquals(10, this.vm.countRemainingChange("Coka", 15));
 	}
+	
 	
 	public void VendingMachine_checkIfCoinEnough_returnTrue() {
 		assertFalse(this.vm.checkIfCoinEnough("Coka", 10));
