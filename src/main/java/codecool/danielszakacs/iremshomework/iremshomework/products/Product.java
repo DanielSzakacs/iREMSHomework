@@ -3,6 +3,7 @@ package codecool.danielszakacs.iremshomework.iremshomework.products;
 public class Product {
 	private int price;
 	private String name;
+	private int quantity;
 	
 	public Product(String name, int price) {
 		this.name = name; 
@@ -16,4 +17,9 @@ public class Product {
 	public int getPrice() {
 		return this.price;
 	}
+	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 }
