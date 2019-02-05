@@ -11,14 +11,15 @@ import codecool.danielszakacs.iremshomework.iremshomework.products.Product;
 
 public class VendingMachine {
 	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
-	private Map<Product, Integer> listOfProduct = new HashMap();
+	private Map<String, Product> listOfProduct = new HashMap();
 	
 	
-	public void listOfCoinHandler(String userInput){
+	public List<Integer> listOfIntCreater(String userInput){
 		List<String> userInputInList = Arrays.asList(userInput.split(","));
         List<Integer> listOfCoins = userInputInList.stream()
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+        return listOfCoins;
 	}
 	
 	
@@ -34,10 +35,20 @@ public class VendingMachine {
 	
 	
 	public int countRemainingChange(String productName, int coin) {
-		int result = coin - this.listOfProduct.get(productName);
+		int result = coin - this.listOfProduct.get(productName).getPrice();
 		return result;
 	}
 	
+
+	
+	public void checkIfCoinEnough(String productName, int coin) {
+		if(coin >= this.listOfProduct.get(productName).getPrice()) {
+			int result = this.countRemainingChange(productName, coin);
+			System.out.println("Your Remaining change is " + result);
+		}else {
+			System.out.println("Please try again, not enought coin.");
+		}
+	}
 	
 
 }
