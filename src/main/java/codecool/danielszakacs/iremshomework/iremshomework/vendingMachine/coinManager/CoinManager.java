@@ -6,6 +6,8 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import codecool.danielszakacs.iremshomework.iremshomework.products.Product;
+
 public class CoinManager {
 	
 	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
@@ -31,16 +33,16 @@ public class CoinManager {
     }
 	
 	
-	public int countRemainingChange(String productName, int coin) {
-		int result = coin - this.listOfProduct.get(productName).getPrice();
+	public int countRemainingChange(Product product, int coin) {
+		int result = coin - product.getPrice();
 		return result;
 	}
 	
 
 	
-	public boolean checkIfCoinEnough(String productName, int coin) {
-		if(coin >= this.listOfProduct.get(productName).getPrice()) {
-			int result = this.countRemainingChange(productName, coin);
+	public boolean checkIfCoinEnough(Product product, int coin) {
+		if(coin >= product.getPrice()) {
+			int result = this.countRemainingChange(product, coin);
 			System.out.println("Your Remaining change is " + result);
 			return true;
 		}else {
