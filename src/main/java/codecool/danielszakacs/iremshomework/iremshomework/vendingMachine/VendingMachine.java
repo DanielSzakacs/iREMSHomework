@@ -136,7 +136,7 @@ public class VendingMachine {
 	public void productReport() {
 		System.out.println("We still have: ");
 		for(String productName: this.listOfProduct.keySet()) {
-			System.out.println(productName + " " + this.listOfProduct.get(productName) + "piece");
+			System.out.println(productName + " " + this.listOfProduct.get(productName) + " piece.");
 		}
 	}
 	

@@ -9,7 +9,6 @@ import codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.Vending
 public class App 
 {
     public static void main( String[] args ){
-        System.out.println( "Hello World!" );
         new VendingMachine().runVendingMachine();
     }
 }
