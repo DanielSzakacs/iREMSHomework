@@ -129,7 +129,15 @@ public class VendingMachine {
 	
 	public void finishOpperation() {
 		System.out.println("See you soon!");
+		this.productReport();
 		this.runVendingMachine();
+	}
+	
+	public void productReport() {
+		System.out.println("We still have: ");
+		for(String productName: this.listOfProduct.keySet()) {
+			System.out.println(productName + " " + this.listOfProduct.get(productName) + "piece");
+		}
 	}
 	
 
