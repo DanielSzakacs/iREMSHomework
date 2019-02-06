@@ -33,6 +33,4 @@ public class VendingMachineTest extends TestCase{
 	public void VendingMachine_checkIfProductEnought_returnTrue() {
 		assertTrue(this.vm.checkIfProductEnought("Coke"));
 	}
-	
-
 }
