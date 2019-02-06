@@ -2,7 +2,6 @@ package codecool.danielszakacs.iremshomework.iremshomework.vendingMachine.coinMa
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
