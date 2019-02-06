@@ -12,7 +12,7 @@ public class CoinManager {
 	private List<Integer> listOfValidCoin = Arrays.asList(1, 5, 10, 25); 
 	
 	
-	public List<Integer> createListOfInt(String userInput){
+	public List<Integer> createListOfInt(String userInput) throws NumberFormatException{
 		List<String> userInputInList = Arrays.asList(userInput.split(","));
         List<Integer> listOfCoins = userInputInList.stream()
                 .map(Integer::valueOf)

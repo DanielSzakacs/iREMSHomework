@@ -1,5 +1,6 @@
 package codecool.danielszakacs.iremshomework.iremshomework.vendingMachine;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class VendingMachine {
 		}
 	};
 	
-	//TODO only for test methods
+	//TODO need a better way...
 	private Map<String, Integer> listOfProductPrice = new HashMap<String, Integer>() {
 		{
 			put("Coke", 25);
@@ -48,10 +49,10 @@ public class VendingMachine {
 				this.offerProducts(userSumCoinAmount);
 			}else {
 				System.out.println("Sorry but your coin is not acceptable");
-				this.finishOpperation();
 			}
 		}catch(NumberFormatException e) {
 			System.out.println("Your input is not correct, please try again");
+		}finally {
 			this.finishOpperation();
 		}
 	}
@@ -99,8 +100,13 @@ public class VendingMachine {
 			userDecision = "Soda";
 		}
 		try {
-			if(this.coinManager.checkIfCoinEnough(this.listOfProductPrice.get(userDecision), usercoin)) {
-				this.giveProductToUser(userDecision);
+			if(this.checkIfProductEnought(userDecision)) {
+				if(this.coinManager.checkIfCoinEnough(this.listOfProductPrice.get(userDecision), usercoin)) {
+					this.giveProductToUser(userDecision);
+					System.out.println("Here is your " + userDecision);
+				}
+			}else {
+				System.out.println("Sorry but no more " + userDecision);
 			}
 		}catch(NullPointerException e) {
 			System.out.println("Sorry but your input is wrong, try it again ");
@@ -108,21 +114,23 @@ public class VendingMachine {
 		}
 	}
 	
+	public boolean checkIfProductEnought(String productName) {
+		if(this.listOfProduct.get(productName)>0) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public void giveProductToUser(String productName) {
-		this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1);
-		System.out.println("Here is your " + productName);	
+		this.listOfProduct.put(productName, this.listOfProduct.get(productName)-1); 	
 	}
 	
 	
 	public void finishOpperation() {
 		System.out.println("See you soon!");
-		this.clearTerminal();
+		this.runVendingMachine();
 	}
 	
-	private void clearTerminal() {
-		System.out.print("\033[H\033[2J");  
-	    System.out.flush(); 
-	}
 
 }
