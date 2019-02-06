@@ -12,6 +12,4 @@ public class App
         System.out.println( "Hello World!" );
         new VendingMachine().runVendingMachine();
     }
-    
-   
 }

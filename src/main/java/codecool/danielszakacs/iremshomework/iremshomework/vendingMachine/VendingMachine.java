@@ -41,12 +41,17 @@ public class VendingMachine {
 	
 	public void runVendingMachine() {
 		String userinput = this.getUserInput("Please add your coin (For instance 1,5,10,25)");
-		List<Integer> usrCoin = this.coinManager.createListOfInt(userinput);
-		if(this.coinManager.checkCoinValid(usrCoin)) {
-			int userSumCoinAmount = usrCoin.stream().mapToInt(t -> t.intValue()).sum();
-			this.offerProducts(userSumCoinAmount);
-		}else {
-			System.out.println("Sorry but you don't have enough coin");
+		try {
+			List<Integer> usrCoin = this.coinManager.createListOfInt(userinput);
+			if(this.coinManager.checkCoinValid(usrCoin)) {
+				int userSumCoinAmount = usrCoin.stream().mapToInt(t -> t.intValue()).sum();
+				this.offerProducts(userSumCoinAmount);
+			}else {
+				System.out.println("Sorry but your coin is not acceptable");
+				this.finishOpperation();
+			}
+		}catch(NumberFormatException e) {
+			System.out.println("Your input is not correct, please try again");
 			this.finishOpperation();
 		}
 	}
@@ -72,7 +77,7 @@ public class VendingMachine {
 		System.out.println("Please select a product");
 		int counter = 0;
 		for(String productName: this.listOfProduct.keySet()) {
-			System.out.println(productName + "  press: (" + counter + ")");
+			System.out.println(productName + " Price: " + this.getListOfProductPrice().get(productName) + "  press: (" + counter + ")");
 			counter++;
 		}
 		this.manageUserOrder(usercoin);
@@ -112,6 +117,12 @@ public class VendingMachine {
 	
 	public void finishOpperation() {
 		System.out.println("See you soon!");
+		this.clearTerminal();
+	}
+	
+	private void clearTerminal() {
+		System.out.print("\033[H\033[2J");  
+	    System.out.flush(); 
 	}
 
 }
