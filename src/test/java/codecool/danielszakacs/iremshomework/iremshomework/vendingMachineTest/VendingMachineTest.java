@@ -30,5 +30,9 @@ public class VendingMachineTest extends TestCase{
 		assertFalse(this.cm.checkIfCoinEnough(cokePrice, 10));
 	}
 	
+	public void VendingMachine_checkIfProductEnought_returnTrue() {
+		assertTrue(this.vm.checkIfProductEnought("Coke"));
+	}
+	
 
 }
